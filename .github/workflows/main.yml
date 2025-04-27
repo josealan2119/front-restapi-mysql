@@ -1,4 +1,4 @@
-name: Node.js_DockerImage_v1
+name: Node.js_DockerImage_v2
 
 on:
   push:
