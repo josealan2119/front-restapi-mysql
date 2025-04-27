@@ -1,10 +1,10 @@
-name: Node.js_DockerImage_v2
+name: Node.js_DockerImage_v1
 
 on:
   push:
-    branches: [ master ]  # o tu rama principal
+    branches: [ master ]  # Cambié 'main' a 'master'
   pull_request:
-    branches: [ master ]
+    branches: [ master ]  # Cambié 'main' a 'master'
 
 jobs:
   node_deploy:
@@ -24,9 +24,9 @@ jobs:
       - name: Download and run the Docker base image
         run: docker run -d --name http_nodejs_app httpd
 
-      # Copiar los archivos al contenedor (desde tu proyecto)
+      # Copiar los archivos del proyecto (raíz) al contenedor Apache
       - name: copy files to Docker image
-        run: docker cp ./public/. http_nodejs_app:/usr/local/apache2/htdocs
+        run: docker cp ./ . http_nodejs_app:/usr/local/apache2/htdocs
 
       # Crear la imagen Docker personalizada
       - name: Build the custom Docker image
@@ -37,9 +37,3 @@ jobs:
       # Subir la imagen a Docker Hub
       - name: Docker Push
         run: docker push ${{ secrets.DOCKER_USER }}/fronted-api-mysql:${{ github.sha }}
-
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fronted-api-mysql .
-
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/fronted-api-mysql
