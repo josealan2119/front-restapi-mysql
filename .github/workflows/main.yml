@@ -26,7 +26,7 @@ jobs:
 
       # Copiar los archivos del proyecto (raíz) al contenedor Apache
       - name: copy files to Docker image
-        run: docker cp ./ . http_nodejs_app:/usr/local/apache2/htdocs
+        run: docker cp ./ http_nodejs_app:/usr/local/apache2/htdocs
 
       # Crear la imagen Docker personalizada
       - name: Build the custom Docker image
